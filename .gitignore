@@ -1,0 +1,13 @@
+node_modules/
+.venv/
+.next/
+dist/
+__pycache__/
+*.pyc
+.env
+.DS_Store
+.vscode/
+coverage/
+build/
+*.db
+*.sqlite3
