@@ -1,74 +1,162 @@
-# ProjectGuard India
+# 🛡️ ProjectGuard India
 
-**Investigation Prioritization & Anomaly Detection Platform**
+> **AI-assisted early-warning and investigation prioritization platform for Indian MPLADS and public development projects.**
 
-ProjectGuard India is a state-of-the-art backend and frontend platform designed to automatically flag and prioritize public development projects based on anomaly detection and risk scoring.
+[![Built at HackHeritage 4.0](https://img.shields.io/badge/HackHeritage-4.0-blue?style=flat-square)](https://github.com/sandipanparia/ProjectGuard)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+PostGIS-336791?style=flat-square&logo=postgresql)](https://www.postgresql.org)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker)](https://www.docker.com)
 
-## Monorepo Architecture
+---
 
-This repository uses a monorepo structure:
-- `apps/web`: Next.js 14 Frontend (App Router, Tailwind CSS)
-- `apps/api`: FastAPI Backend (Python, SQLAlchemy, PostgreSQL, PostGIS, Redis)
-- `infrastructure`: Docker Compose setup
+## 🎯 Problem Statement
 
-## Getting Started
+India's MPLADS (Member of Parliament Local Area Development Scheme) disburses ₹5 crore per MP per year for local infrastructure. With 543 MPs, that's **₹2,715 crore annually** across tens of thousands of micro-projects — making systematic oversight nearly impossible by hand.
 
-### Prerequisites
-- Docker & Docker Compose
-- Node.js 20+ (if running frontend locally outside Docker)
-- Python 3.11+ (if running backend locally outside Docker)
+**ProjectGuard India** applies a transparent, rule-based risk engine to detect early warning signals of irregularity — cost overruns, contractor concentration, geographic duplication, missing evidence — and surfaces them for human investigators in a prioritized queue.
 
-### 1. Environment Setup
+---
 
-Copy the example environment file:
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 📊 **Intelligence Dashboard** | Real-time metrics, top critical projects, system alerts |
+| 🔍 **Investigation Queue** | Risk-sorted project list with one-click detail view |
+| 🗺️ **Map Intelligence** | Interactive SVG India map with geographic cluster detection |
+| 🏢 **Contractor Analysis** | Entity relationship mapping and concentration alerts |
+| 📈 **Analytics** | Anomaly distributions, state heatmaps, evidence deficits |
+| ⚙️ **Rule Engine Admin** | Enable/disable/tune 20+ detection rules |
+| 🔐 **RBAC Auth** | Role-based access: superadmin, analyst, viewer, field_officer |
+| 📋 **Evidence Management** | Upload and track compliance documents per project |
+| 📝 **Audit Logs** | Every action is immutably logged |
+
+---
+
+## 🏗️ Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | Next.js 14 (App Router), Tailwind CSS, Inter font |
+| **Backend** | FastAPI (Python 3.11+), SQLAlchemy 2.0, Alembic |
+| **Database** | PostgreSQL 15 + PostGIS 3.3 |
+| **Cache/Queue** | Redis 7 |
+| **Auth** | JWT + bcrypt, RBAC |
+| **Infrastructure** | Docker Compose, Nginx |
+
+---
+
+## 🚀 Quick Start
+
+### With Docker (Recommended)
 ```bash
+git clone https://github.com/sandipanparia/ProjectGuard.git
+cd ProjectGuard
 cp .env.example .env
+docker-compose up -d
+docker-compose exec api alembic upgrade head
+docker-compose exec api python -m app.ingestion.demo_seed
 ```
-Ensure that `JWT_SECRET` and `SECRET_KEY` are secure for production use.
 
-### 2. Start Services via Docker Compose
+Open **http://localhost:3000**
 
-Run the entire stack in the background:
+### Without Docker
 ```bash
-docker compose up -d --build
+# Frontend
+cd apps/web && npm install && npm run dev
+
+# Backend
+cd apps/api
+python -m venv .venv && .venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
 ```
 
-### 3. Database Migrations
+**Default credentials:** `admin@projectguard.in` / `admin123`
 
-Run Alembic migrations to create the database schema:
-```bash
-docker compose exec api alembic upgrade head
+---
+
+## 📁 Project Structure
+
+```
+ProjectGuard/
+├── apps/
+│   ├── api/          # FastAPI backend (risk engine, auth, GIS APIs)
+│   └── web/          # Next.js 14 frontend (dashboard, map, analytics)
+├── data/
+│   ├── demo/         # Sample CSV/JSON demo datasets (15 projects, 5 contractors)
+│   └── schemas/      # PostgreSQL schema SQL dump
+├── docs/
+│   ├── architecture.md   # System design & DB schema
+│   ├── api_reference.md  # Complete REST API docs
+│   └── setup.md          # Detailed setup guide
+├── scripts/
+│   └── seed_demo.sh  # One-command demo data seeder
+├── infrastructure/
+│   └── nginx.conf    # Production reverse proxy config
+└── docker-compose.yml
 ```
 
-### 4. Seed Demo Data
+---
 
-The demo dataset contains over 1,000 synthetic projects (clean, anomalous, and missing data variants):
-```bash
-docker compose exec api python -m app.ingestion.demo_seed
-```
+## 🔬 Risk Engine — Detection Rules
 
-### 5. Access the Platform
+The rule engine evaluates each project against 20+ rules across 5 categories:
 
-- **Frontend**: [http://localhost:3000](http://localhost:3000)
-- **Backend API**: [http://localhost:8000/docs](http://localhost:8000/docs) (Swagger UI)
+**Financial (8 rules)**
+- Financial vs Physical Progress Mismatch (> 30% delta)
+- Unit Rate Anomaly (vs district peer average)
+- Cost Overrun > 20%
+- Unusual Payment Velocity
 
-### Demo Accounts
+**Timeline (4 rules)**
+- Project Delayed > 6 months
+- Stalled Project (no update in 90 days)
+- Suspicious Same-Day Completion Claim
 
-The database seeder automatically creates the following accounts:
-- **Admin**: `admin` / `admin123`
-- **Investigator**: `investigator` / `investigator123`
+**Contractor (4 rules)**
+- Single Contractor Dominance (> 30% of district spend)
+- Blacklisted Contractor Award
+- Multiple Awards to Related Entities
 
-## Risk Engine
+**Geographic (3 rules)**
+- Spatial Cluster (3+ similar projects within 2km)
+- Duplicate Project Detection
+- Cross-District Boundary Anomaly
 
-The intelligence layer is driven by a deterministic Rule Engine in `apps/api/app/risk`.
-Rules evaluate contextual peers (e.g., peer median cost) to assign risk scores to projects. Signals are aggregated and capped per category to calculate the final 0-100 Investigation Risk score.
+**Evidence / Data Quality (3 rules)**
+- Missing Measurement Book
+- Missing Geotagged Photos
+- No Payment Receipts on File
 
-## Known Limitations
+---
 
-- **MapLibre Integration**: The Map Intelligence page currently contains a visual UI placeholder. `maplibre-gl` integration requires actual GeoJSON endpoints that the API supports but need wiring on the frontend canvas.
-- **Machine Learning**: As per requirements, no fake ML predictions were used. The current intelligence is fully deterministic and rule-based.
-- **Background Workers**: Basic background job structures were created, but Celery/ARQ workers need to be fully hooked up for processing bulk risk recalculations.
+## 📸 Screenshots
 
-## Future Integration Points
+| Dashboard | Investigation Queue | Map Intelligence |
+|-----------|-------------------|-----------------|
+| Real-time risk metrics | Sortable priority queue | Interactive India dot-map |
+| Alert feed | Project detail view | State-wise heatmap |
 
-The `RiskEngine` architecture (`apps/api/app/risk/engine.py`) is designed so that future ML models (LLMs, Computer Vision on evidence photos, satellite analysis) can simply output a standard `RiskSignal` object. The engine will transparently incorporate these AI signals into the final score without requiring changes to the core application logic.
+---
+
+## 📚 Documentation
+
+- [Architecture Guide](docs/architecture.md)
+- [API Reference](docs/api_reference.md)
+- [Setup & Deployment](docs/setup.md)
+
+---
+
+## 🏆 Built At
+
+**HackHeritage 4.0 Hackathon** — Team ProjectGuard India
+
+> *"Transparency in public spending is a fundamental right. Technology can make it a reality."*
+
+---
+
+## 📄 License
+
+MIT License — free to use, modify, and deploy for public good.

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "org-001",
+    "name": "M/S BuildFast India Pvt Ltd",
+    "registration_number": "MH-2018-CON-00421",
+    "org_type": "contractor",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "blacklisted": false,
+    "active_projects": 12,
+    "total_contract_value": 48500000,
+    "states_operating": ["Maharashtra", "Gujarat", "Karnataka"],
+    "notes": "High concentration — awarded 12 projects worth ₹4.85 Cr across 3 states."
+  },
+  {
+    "id": "org-002",
+    "name": "Construct Co. Ltd.",
+    "registration_number": "KA-2015-CON-00218",
+    "org_type": "contractor",
+    "state": "Karnataka",
+    "district": "Bellary",
+    "blacklisted": false,
+    "active_projects": 4,
+    "total_contract_value": 18200000,
+    "states_operating": ["Karnataka", "Telangana"],
+    "notes": "2 projects with cost anomalies under investigation."
+  },
+  {
+    "id": "org-003",
+    "name": "Regional Build Works",
+    "registration_number": "MH-2020-CON-00887",
+    "org_type": "contractor",
+    "state": "Maharashtra",
+    "district": "Nashik",
+    "blacklisted": false,
+    "active_projects": 5,
+    "total_contract_value": 12400000,
+    "states_operating": ["Maharashtra"],
+    "notes": "Geographic clustering of projects in Nashik district flagged."
+  },
+  {
+    "id": "org-004",
+    "name": "Surat Construction Group",
+    "registration_number": "GJ-2017-CON-00345",
+    "org_type": "contractor",
+    "state": "Gujarat",
+    "district": "Surat",
+    "blacklisted": false,
+    "active_projects": 7,
+    "total_contract_value": 32800000,
+    "states_operating": ["Gujarat"],
+    "notes": "Suspicious completion claims on 2 ongoing projects."
+  },
+  {
+    "id": "org-005",
+    "name": "BCS Infra (Blacklisted)",
+    "registration_number": "DL-2012-CON-00112",
+    "org_type": "contractor",
+    "state": "Delhi",
+    "district": "New Delhi",
+    "blacklisted": true,
+    "blacklist_reason": "Convicted of fraudulent billing in 2024 UP infrastructure audit.",
+    "active_projects": 0,
+    "total_contract_value": 0,
+    "states_operating": [],
+    "notes": "Blacklisted by MoRD. Any new project award is a critical alert."
+  }
+]

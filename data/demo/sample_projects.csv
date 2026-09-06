@@ -1,0 +1,16 @@
+project_code,title,state,district,block,sanctioned_amount,actual_expenditure,physical_progress_pct,financial_progress_pct,status,contractor,start_date,expected_end_date,latitude,longitude,risk_score,risk_level,flags
+DEMO-HIGH-001,Road Construction - NH Bypass Pune,Maharashtra,Pune,Haveli,4500000,3800000,42.0,84.4,active,M/S BuildFast India Pvt Ltd,2025-04-01,2025-10-31,18.5204,73.8567,87,critical,"Financial Progress Mismatch,Geo Cluster"
+PRJ-00821,Water Supply Pipeline Phase 2,Maharashtra,Nagpur,Nandanvan,12000000,9800000,55.0,81.6,active,M/S BuildFast India Pvt Ltd,2025-02-15,2025-09-30,21.1458,79.0882,81,critical,Contractor Concentration
+PRJ-00442,Primary Health Centre Renovation,Karnataka,Bellary,Bellary Urban,3800000,2100000,30.0,55.2,delayed,Construct Co. Ltd.,2024-11-01,2025-05-31,15.1394,76.9214,78,critical,"Cost Anomaly,Timeline Overrun"
+PRJ-01105,Village Road Paving Phase II,Maharashtra,Nashik,Trimbakeshwar,2250000,1980000,68.0,88.0,active,Regional Build Works,2025-01-10,2025-07-10,20.0059,73.7898,72,high,"Geo Cluster,Missing BOQ"
+PRJ-02234,Government School Building,Gujarat,Surat,Udhna,5500000,3200000,44.0,58.1,active,Surat Construction Group,2025-03-01,2025-12-31,21.1702,72.8311,65,high,Suspicious Completion Claim
+PRJ-00118,Minor Canal Repair Works,Telangana,Hyderabad,Secunderabad,1800000,900000,40.0,50.0,active,HydroWorks Pvt Ltd,2025-05-01,2025-11-30,17.3850,78.4867,58,moderate,Timeline Delay
+PRJ-00330,Rural Road Rehabilitation,Karnataka,Mysuru,Mysuru Rural,2200000,1500000,62.0,68.1,active,K-Roads Ltd,2025-01-20,2025-08-20,12.2958,76.6394,52,moderate,Missing Documents
+PRJ-00511,Storm Drainage Improvement,Tamil Nadu,Chennai,Adyar,6200000,4100000,55.0,66.1,active,Chennai Civil Works,2024-12-15,2025-08-15,13.0827,80.2707,44,moderate,Data Quality
+PRJ-00654,Minor Dam Restoration,Rajasthan,Jaipur,Amber,3500000,2100000,65.0,60.0,completed,Rajputana Infra,2025-01-01,2025-06-30,26.9124,75.7873,38,low,None
+PRJ-00777,Public Park Development,Uttar Pradesh,Agra,Agra Urban,1200000,900000,78.0,75.0,completed,UP Greenworks,2024-10-01,2025-03-31,27.1767,78.0081,22,low,None
+PRJ-00899,River Bridge Construction,Bihar,Patna,Patna Sahib,8800000,4200000,38.0,47.7,active,Bihar Bridges Corp,2025-04-15,2026-01-15,25.5941,85.1376,18,low,None
+PRJ-01001,Rural Electrification Phase I,Maharashtra,Chhatrapati Sambhajinagar,Paithan,4400000,3100000,58.0,70.4,delayed,PowerGrid Rural,2025-02-01,2025-09-30,19.8762,75.3433,71,high,"Delayed Timeline,Financial Anomaly"
+PRJ-01200,Minor Irrigation Lift Scheme,Maharashtra,Nanded,Ardhapur,2800000,2200000,60.0,78.5,active,M/S BuildFast India Pvt Ltd,2025-03-15,2025-10-15,19.1605,77.3212,67,high,Contractor Concentration
+PRJ-01350,Community Hall Construction,Gujarat,Vadodara,Vadodara Urban,3200000,2900000,85.0,90.6,active,Vadodara Civil Corp,2025-01-01,2025-07-31,22.3072,73.1812,31,low,None
+PRJ-01498,Anganwadi Centre Renovation,Karnataka,Dharwad,Hubli Urban,900000,650000,72.0,72.2,completed,Rural Dev Works KA,2025-01-15,2025-05-15,15.3647,75.1240,15,low,None
