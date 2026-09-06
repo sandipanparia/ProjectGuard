@@ -7,7 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ProjectGuard India",
-  description: "Investigation Prioritization & Anomaly Detection Platform",
+  description: "Investigation Prioritization & Anomaly Detection Platform for Indian MPLADS Projects",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({
@@ -17,12 +18,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body className={`${inter.className} bg-slate-950 text-slate-50 min-h-screen antialiased`}>
         <div className="flex h-screen overflow-hidden">
           <Sidebar />
-          
-          {/* Main Content */}
-          <main className="flex-1 overflow-y-auto bg-slate-950">
+          {/* Main Content — padded top on mobile to account for fixed top bar */}
+          <main className="flex-1 overflow-y-auto bg-slate-950 pt-14 lg:pt-0">
             {children}
           </main>
         </div>

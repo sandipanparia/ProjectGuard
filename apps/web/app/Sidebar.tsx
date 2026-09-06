@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 const links = [
   {
@@ -62,11 +63,10 @@ const links = [
   },
 ];
 
-export default function Sidebar() {
+function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
   const pathname = usePathname();
-
   return (
-    <aside className="w-64 border-r border-slate-800 bg-slate-900/70 backdrop-blur-xl flex flex-col flex-shrink-0">
+    <div className="flex flex-col h-full">
       {/* Logo */}
       <div className="p-5 border-b border-slate-800">
         <div className="flex items-center gap-2.5 mb-1">
@@ -83,7 +83,7 @@ export default function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-3 space-y-0.5">
+      <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
         <p className="px-3 py-2 text-[10px] uppercase tracking-widest text-slate-600 font-semibold">Navigation</p>
         {links.map((link) => {
           const isActive =
@@ -93,6 +93,7 @@ export default function Sidebar() {
             <Link
               key={link.name}
               href={link.href}
+              onClick={onLinkClick}
               className={`relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                 isActive
                   ? "bg-blue-500/10 text-blue-400 border border-blue-500/20"
@@ -142,6 +143,72 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
-    </aside>
+    </div>
+  );
+}
+
+export default function Sidebar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  return (
+    <>
+      {/* ── MOBILE TOP BAR ── */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4 py-3 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
+            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <span className="text-sm font-bold text-white">ProjectGuard</span>
+          <span className="text-[10px] text-slate-500 uppercase tracking-wider hidden xs:block">India</span>
+        </div>
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white transition-colors"
+          aria-label="Toggle navigation menu"
+        >
+          {mobileOpen ? (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
+        </button>
+      </div>
+
+      {/* ── MOBILE DRAWER OVERLAY ── */}
+      {mobileOpen && (
+        <div
+          className="lg:hidden fixed inset-0 z-30 bg-black/60 backdrop-blur-sm"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      {/* ── MOBILE DRAWER ── */}
+      <aside
+        className={`lg:hidden fixed top-0 left-0 bottom-0 z-40 w-72 bg-slate-900 border-r border-slate-800 transform transition-transform duration-300 ease-in-out ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="pt-16 h-full">
+          <SidebarContent onLinkClick={() => setMobileOpen(false)} />
+        </div>
+      </aside>
+
+      {/* ── DESKTOP SIDEBAR ── */}
+      <aside className="hidden lg:flex w-64 border-r border-slate-800 bg-slate-900/70 backdrop-blur-xl flex-col flex-shrink-0">
+        <SidebarContent />
+      </aside>
+    </>
   );
 }
